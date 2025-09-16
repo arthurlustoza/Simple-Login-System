@@ -16,8 +16,6 @@ type Cliente struct { //Cliente cadastrando
 
 }
 
-var senhaUsuario int
-var nomeUsuario string
 var opcCadastro string
 
 func criandoCadastro() {
@@ -25,18 +23,6 @@ func criandoCadastro() {
 }
 
 func main() {
-
-	fmt.Println("Digite o seu nome:  ")
-	fmt.Scanln(&nomeUsuario)
-
-	fmt.Println("Digite a sua senha")
-	fmt.Scanln(&senhaUsuario)
-
-	fmt.Println("Deseja criar seu cadastro? (s/n)")
-	fmt.Scanln(&opcCadastro)
-	if opcCadastro == "s" {
-		criandoCadastro()
-	}
 
 	user1 := Usuario{ //info usuario
 		Nome:  "Arthur",
@@ -46,15 +32,38 @@ func main() {
 		Senha: 123,
 	}
 
-	if senhaUsuario == user1.Senha && nomeUsuario == user1.Nome { //sistema de verificacao de acesso
-		fmt.Println("Acesso Liberado")
+	var possuiCadatro string
 
-		fmt.Println("Suas informacoes: ")
-		fmt.Println("Idade: ", user1.Idade)
-		fmt.Println("Peso: ", user1.Peso)
-		fmt.Println("Assinatura ativa? ", user1.Ativo)
+	fmt.Println("Você possui um cadastro ?(s/n)")
+	fmt.Scanln(&possuiCadatro)
 
-	} else {
-		fmt.Println("Acesso Negado")
+	if possuiCadatro == "s" || possuiCadatro == "S" {
+
+		var senhaUsuario int
+		var nomeUsuario string
+
+		fmt.Println("Digite o seu nome:  ")
+		fmt.Scanln(&nomeUsuario)
+
+		fmt.Println("Digite a sua senha")
+		fmt.Scanln(&senhaUsuario)
+
+		if senhaUsuario == user1.Senha && nomeUsuario == user1.Nome { //sistema de verificacao de acesso
+			fmt.Println("Acesso Liberado")
+
+			fmt.Println("Suas informacoes: ")
+			fmt.Println("Idade: ", user1.Idade)
+			fmt.Println("Peso: ", user1.Peso)
+			fmt.Println("Assinatura ativa: ", user1.Ativo)
+
+		} else {
+			fmt.Println("Acesso Negado")
+		}
+	} else if possuiCadatro == "n" || possuiCadatro == "N" {
+		fmt.Println("Deseja criar seu cadastro? (s/n)")
+		fmt.Scanln(&opcCadastro)
+		if opcCadastro == "s" || opcCadastro == "S" {
+			criandoCadastro()
+		}
 	}
 }
